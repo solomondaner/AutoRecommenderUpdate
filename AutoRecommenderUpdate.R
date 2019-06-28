@@ -1,4 +1,4 @@
-#'Automatically feature products in your current reccommender model
+#'Automatically feature products in your current product recommender
 #' @author Solomon Daner
 #' @family Marketing Modeling
 #' @param data The scored model from AutoRecomScoring()
