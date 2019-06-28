@@ -46,7 +46,7 @@
 20:      12347     22950           8 2019-06-23 12:14:10
 21:      12347     47566           9 2019-06-23 12:14:10
 22:      12347    85123A          10 2019-06-23 12:14:10
-    CustomerID StockCode ProductRank      ModelTimeStamp
+    CustomerID StockCode ProductRank      ModelTimeStamp 
 
 > Test2 = AutoRecommenderUpdate(data = Test1,FeaturedProduct = "00")
 Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") : 
@@ -101,3 +101,5 @@ Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") :
 18:      12347     22950           8 2019-06-23 12:14:10
 19:      12347     47566           9 2019-06-23 12:14:10
 20:      12347     23167          10 2019-06-23 12:14:10
+
+#### Notice that the featured products will always have a product rank of 0. This makes it easier to delete later on if needed. 
