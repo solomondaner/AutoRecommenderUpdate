@@ -47,12 +47,12 @@
 21:      12347     47566           9 2019-06-23 12:14:10
 22:      12347    85123A          10 2019-06-23 12:14:10
     CustomerID StockCode ProductRank      ModelTimeStamp 
-
+    
 > Test2 = AutoRecommenderUpdate(data = Test1,FeaturedProduct = "00")
 Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") : 
   Every Customer has the featured product
   
-  We do not want to run this function if customers already have the products recommended to them
+We do not want to run this function if every customer already has the product recommended to them.
 
 > Test3 = AutoRecommenderUpdate(data = ProductRecommenderData ,FeaturedProduct = "23167")
 > Test3
@@ -80,7 +80,7 @@ Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") :
 21:      12347    85123A          10 2019-06-23 12:14:10
     CustomerID StockCode ProductRank      ModelTimeStamp
     
-    Notice 
+Notice that only the customers without the featured product get a new record. This avoids duplicate products being recommended to the same customer.
     
 > Test4 = AutoRecommenderUpdate(data = ProductRecommenderData,FeaturedProduct = "23167",ReplaceProduct = TRUE)
 > Test4
