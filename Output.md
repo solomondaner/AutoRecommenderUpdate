@@ -51,6 +51,8 @@
 > Test2 = AutoRecommenderUpdate(data = Test1,FeaturedProduct = "00")
 Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") : 
   Every Customer has the featured product
+  
+  We do not want to run this function if customers already have the products recommended to them
 
 > Test3 = AutoRecommenderUpdate(data = ProductRecommenderData ,FeaturedProduct = "23167")
 > Test3
@@ -78,6 +80,8 @@ Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") :
 21:      12347    85123A          10 2019-06-23 12:14:10
     CustomerID StockCode ProductRank      ModelTimeStamp
     
+    Notice 
+    
 > Test4 = AutoRecommenderUpdate(data = ProductRecommenderData,FeaturedProduct = "23167",ReplaceProduct = TRUE)
 > Test4
     CustomerID StockCode ProductRank      ModelTimeStamp
@@ -102,4 +106,6 @@ Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") :
 19:      12347     47566           9 2019-06-23 12:14:10
 20:      12347     23167          10 2019-06-23 12:14:10
 
-#### Notice that the featured products will always have a product rank of 0. This makes it easier to delete later on if needed. 
+You have the option to replace products of a perticular rank by sepcifying the N argument. I left it blank so N = 10. This can be useful if you are wrorried about overloading your servers or you want to limit the amount of products to recommend to your customers. 
+
+##### Notice that the featured products will always have a product rank of 0. This makes it easier to delete later on if needed. 
