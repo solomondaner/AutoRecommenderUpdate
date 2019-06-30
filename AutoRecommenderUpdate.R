@@ -8,7 +8,7 @@
 #' @param EntityColName Column name in quotes for the Entity, such as customer
 #' @param ProductColName Column name in quotes t0 represent the column name for the product, such as SKU
 #' @param Rank Column name in quotes to represent the products rank
-#' @param TimeStamp Column name in quotes to represent if the timestamp should be added. If not, use ""
+#' @param TimeStamp Column name in quotes to represent if the timestamp should be added. If not, use "". Automatically shows if ReplaceProduct equals True.
 #' @return The scored model with featured products 
 #' @examples 
 #' @export
