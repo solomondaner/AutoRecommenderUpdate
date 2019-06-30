@@ -1,12 +1,12 @@
 #### Hard Coded Data 
 
-'''{r}
+```{r}
 ProductRecommenderData = data.table :: data.table(CustomerID = rep(c(12346L,12347L),each = 10), 
 StockCode = c("23167","23165","22969","22501","22720","23154","22722", 
 "23298", "22961", "23293", "23245", "22961", "21977", "22952",
 "22730","23240","22624","22950","47566","85123A"),
 ProductRank = c(1:10), ModelTimeStamp = "2019-06-23 12:14:10")
-'''
+```
 
 > ProductRecommenderData
     CustomerID StockCode ProductRank      ModelTimeStamp
