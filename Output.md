@@ -116,6 +116,6 @@ Notice that only the customers without the featured product get a new record. Th
 19:      12347     47566           9 2019-06-23 12:14:10
 20:      12347     23167          10 2019-06-23 12:14:10
 
-You have the option to replace products of a perticular rank by sepcifying the N argument (I left it blank so N equals 10 by default). This can be useful if you are worried about overloading your servers with too many products or you want to limit the amount of products to recommend to your customers.
+You have the option to replace products of a perticular rank by sepcifying the N argument (I left it blank so N equals 10 by default). This can be useful if you are worried about overloading your servers with too many products or you want to control the amount of products you want to recommend to your customers.
 
 #### Notice that the featured products will always have a product rank of 0. This makes it easier to delete later on if needed. 
