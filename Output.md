@@ -1,4 +1,5 @@
 #### Hard Coded Data 
+
 '''{r}
 ProductRecommenderData = data.table :: data.table(CustomerID = rep(c(12346L,12347L),each = 10), 
 StockCode = c("23167","23165","22969","22501","22720","23154","22722", 
