@@ -34,17 +34,17 @@ AutoRecommenderUpdate <- function (
   CustomersWithoutFeaturedItemTable <- data[!(get(EntityColName) %in% CustomersWithFeaturedItem )]
   
   # The Three Possible Scenerios are Listed Below----
-  # No Customer Has the Fetured Product Recommended to Them----
-  # Every Customer Already Has the Fetured Product Recommended to Them----
-  # Some Customers Have the Fetured Product Recommended to Them----
+  # No Customer Has the Fetured Product Recommended to Them
+  # Every Customer Already Has the Fetured Product Recommended to Them
+  # Some Customers Have the Fetured Product Recommended to Them
   if (nrow(CustomersWithFeaturedItemTable) == 0) {
-    A = CustomersWithoutFeaturedItemTable
-    B = NULL
+    A <- CustomersWithoutFeaturedItemTable
+    B <- NULL
   } else if(nrow(CustomersWithoutFeaturedItemTable) == 0) {
-    stop ("Every Customer has the featured product")
+    return ("Every Customer has the featured product")
   } else {
-    A = CustomersWithoutFeaturedItemTable
-    B = CustomersWithFeaturedItemTable
+    A <- CustomersWithoutFeaturedItemTable
+    B <- CustomersWithFeaturedItemTable
   }
   
   # Choose to replace the least likey product with the featured Product----
@@ -52,24 +52,26 @@ AutoRecommenderUpdate <- function (
     if(!N %in% unique(A[,get(Rank)])) {
       stop("Rank does not exist in model")
     }
-    data.table :: set(A,A[get(Rank) == N, which = TRUE],
-                      get("ProductColName"),FeaturedProduct) 
-    data <- data.table :: rbindlist(list(A,B), fill = TRUE)
-    data.table :: setorderv(data,c(get("EntityColName"),get("Rank")))
+    data.table::set(A, i = A[get(Rank) == N, which = TRUE],
+          j = eval(ProductColName), value = FeaturedProduct) 
+    data <- data.table::rbindlist(list(A,B), fill = TRUE)
+    data.table::setorderv(data, cols = c(eval(EntityColName),eval(Rank)))
+    return(data)
     
     # Add the faetured product to current recommendations----
   } else {
     
     # Test if timestamp should be added----
-  if(TimeStamp == ""){
-      DT <- data.table :: data.table(unique(A[,get(EntityColName)]), FeaturedProduct,0)
-      names(DT) <- c(get("EntityColName"),get("ProductColName"),get("Rank"))
-  } else {
-      DT <- data.table :: data.table(unique(A[,get(EntityColName)]), FeaturedProduct,0, unique(A[,get(TimeStamp)]))
-      names(DT) <- c(get("EntityColName"),get("ProductColName"),get("Rank"), get("TimeStamp"))
-  }
-    data <- data.table :: rbindlist(list(DT,A,B),fill = TRUE)
-    data.table :: setorderv(data,c(get("EntityColName"),get("Rank")))
+    if(TimeStamp == ""){
+      DT <- data.table::data.table(unique(A[,get(EntityColName)]), FeaturedProduct,0)
+      names(DT) <- c(eval(EntityColName),eval(ProductColName),eval(Rank))
+    } else {
+      DT <- data.table::data.table(unique(A[,get(EntityColName)]), FeaturedProduct,0, unique(A[,get(TimeStamp)]))
+      names(DT) <- c(eval(EntityColName),eval(ProductColName),eval(Rank),eval(TimeStamp))
+    }
+  data <- data.table::rbindlist(list(DT,A,B), fill = TRUE)
+  data.table::setorderv(data, cols = c(eval(EntityColName),eval(Rank)))
+  return(data)
   }}
 
 
