@@ -93,7 +93,7 @@ Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") :
 21:      12347    85123A          10 2019-06-23 12:14:10
     CustomerID StockCode ProductRank      ModelTimeStamp
     
-<!-- # Notice that only the customers without the featured product get a new record. This avoids duplicate products being recommended to the same customer. -->
+# Notice that only the customers without the featured product get a new record. This avoids duplicate products being recommended to the same customer.
     
 > Test4 = AutoRecommenderUpdate(data = ProductRecommenderData,FeaturedProduct = "23167",ReplaceProduct = TRUE)
 > Test4
@@ -119,8 +119,8 @@ Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") :
 19:      12347     47566           9 2019-06-23 12:14:10
 20:      12347     23167          10 2019-06-23 12:14:10
 
-<!-- # You have the option to replace products of a perticular rank by sepcifying the N argument (I left it blank so N equals 10 by default). This can be useful if you are worried about overloading your servers with too many products or you want to control the amount of products you want to recommend to your customers. -->
+# You have the option to replace products of a perticular rank by sepcifying the N argument (I left it blank so N equals 10 by default). This can be useful if you are worried about overloading your servers with too many products or you want to control the amount of products you want to recommend to your customers.
 
-<!-- #### Notice that the featured products will always have a default product rank of 0. Hence, this will be the first product customer's see and it facilitates deletion if needed.  -->
+#### Notice that the featured products will always have a default product rank of 0. Hence, this will be the first product customer's see and it facilitates deletion if needed.
 
 
