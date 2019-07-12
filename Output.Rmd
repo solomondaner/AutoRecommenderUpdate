@@ -1,5 +1,4 @@
-#### Hard Coded Data 
-
+# HardCoded Data 
 ```{r}
 ProductRecommenderData = data.table :: data.table(CustomerID = rep(c(12346L,12347L),each = 10), 
 StockCode = c("23167","23165","22969","22501","22720","23154","22722", 
@@ -8,6 +7,7 @@ StockCode = c("23167","23165","22969","22501","22720","23154","22722",
 ProductRank = c(1:10), ModelTimeStamp = "2019-06-23 12:14:10")
 ```
 
+# View Data
 > ProductRecommenderData
     CustomerID StockCode ProductRank      ModelTimeStamp
  1:      12346     23167           1 2019-06-23 12:14:10
@@ -31,6 +31,7 @@ ProductRank = c(1:10), ModelTimeStamp = "2019-06-23 12:14:10")
 19:      12347     47566           9 2019-06-23 12:14:10
 20:      12347    85123A          10 2019-06-23 12:14:10
 
+# Test The Function
 > Test1 = AutoRecommenderUpdate(data = ProductRecommenderData ,FeaturedProduct = "00")
 > Test1
     CustomerID StockCode ProductRank      ModelTimeStamp
@@ -57,7 +58,9 @@ ProductRank = c(1:10), ModelTimeStamp = "2019-06-23 12:14:10")
 21:      12347     47566           9 2019-06-23 12:14:10
 22:      12347    85123A          10 2019-06-23 12:14:10
     CustomerID StockCode ProductRank      ModelTimeStamp 
-    
+
+# The featured item was successfully added to both customers.
+
 > Test2 = AutoRecommenderUpdate(data = Test1,FeaturedProduct = "00")
 Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") : 
   Every Customer has the featured product
@@ -118,6 +121,6 @@ Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") :
 
 # You have the option to replace products of a perticular rank by sepcifying the N argument (I left it blank so N equals 10 by default). This can be useful if you are worried about overloading your servers with too many products or you want to control the amount of products you want to recommend to your customers.
 
-#### Notice that the featured products will always have a product rank of 0. This makes it easier to delete later on if needed. 
+#### Notice that the featured products will always have a default product rank of 0. Hence, this will be the first product customer's see and it facilitates deletion if needed. 
 
 
