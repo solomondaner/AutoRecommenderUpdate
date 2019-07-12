@@ -92,10 +92,10 @@ Error in AutoRecommenderUpdate(data = Test1, FeaturedProduct = "00") :
 20:      12347     47566           9 2019-06-23 12:14:10
 21:      12347    85123A          10 2019-06-23 12:14:10
     CustomerID StockCode ProductRank      ModelTimeStamp
-    
-# Notice that only the customers without the featured product get a new record. 
-# This avoids duplicate products being recommended to the same customer. 
 
+---
+# Notice that only the customers without the featured product get a new record. This avoids duplicate products being recommended to the same customer. 
+---
 > Test4 = AutoRecommenderUpdate(data = ProductRecommenderData,FeaturedProduct = "23167",ReplaceProduct = TRUE)
 > Test4
     CustomerID StockCode ProductRank      ModelTimeStamp
