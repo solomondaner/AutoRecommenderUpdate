@@ -1,15 +1,15 @@
-#'Automatically feature products in your current product recommender
+#' Automate a user's ability to update an entire product recommender with featured SKUs, without duplicating the same SKU per customer.
 #' @author Solomon Daner
 #' @family Marketing Modeling
-#' @param data The scored model from AutoRecomScoring()
-#' @param FeaturedProduct This is the product in quotes that you want to feature 
-#' @param Replaceproduct Logical argument that determines if featured product should replace the product your table. Set to False
-#' @param N The ranks of the product that would be replaced 
+#' @param data Product Recommender
+#' @param FeaturedProduct This is the product in quotes that you want to feature in the Product Recommender 
+#' @param Replaceproduct Logical argument that determines if featured product should replace a product in your table. Set to False
+#' @param N The rank of the product that would be replaced. Only applicable if Replaceproduct equals True
 #' @param EntityColName Column name in quotes for the Entity, such as customer
-#' @param ProductColName Column name in quotes t0 represent the column name for the product, such as SKU
+#' @param ProductColName Column name in quotes to represent the column name for the product, such as SKU
 #' @param Rank Column name in quotes to represent the products rank
-#' @param TimeStamp Column name in quotes to represent if the timestamp should be added. If not, use "". Automatically shows if ReplaceProduct equals True.
-#' @return The scored model with featured products 
+#' @param TimeStamp Column name in quotes to represent if the timestamp should be added. If not, use NULL. Automatically shows if ReplaceProduct equals True.
+#' @return The product recommender with featured products 
 #' @examples 
 #' @export
 AutoRecommenderUpdate <- function (
@@ -20,8 +20,7 @@ AutoRecommenderUpdate <- function (
   EntityColName  = "CustomerID",
   ProductColName = "StockCode",
   Rank = "ProductRank",
-  TimeStamp = "ModelTimeStamp"
-) {
+  TimeStamp = "ModelTimeStamp") {
   
   # Ensure data is data.table----
   if (!data.table::is.data.table(data)) {
@@ -52,26 +51,63 @@ AutoRecommenderUpdate <- function (
     if(!N %in% unique(A[,get(Rank)])) {
       stop("Rank does not exist in model")
     }
-    data.table::set(A, i = A[get(Rank) == N, which = TRUE],
-          j = eval(ProductColName), value = FeaturedProduct) 
-    data <- data.table::rbindlist(list(A,B), fill = TRUE)
-    data.table::setorderv(data, cols = c(eval(EntityColName),eval(Rank)))
+    data.table::set(
+      A, 
+      i = A[get(Rank) == N, which = TRUE],
+      j = eval(ProductColName), 
+      value = FeaturedProduct) 
+    data <- data.table::rbindlist(
+      list(A,B), 
+      fill = TRUE)
+    data.table::setorderv(
+      data, 
+      cols = c(eval(EntityColName),
+               eval(Rank)))
     return(data)
     
-    # Add the faetured product to current recommendations----
+    # Add the featured product to current recommendations----
   } else {
     
     # Test if timestamp should be added----
-    if(TimeStamp == ""){
-      DT <- data.table::data.table(unique(A[,get(EntityColName)]), FeaturedProduct,0)
-      names(DT) <- c(eval(EntityColName),eval(ProductColName),eval(Rank))
+    if(is.null(TimeStamp)){
+      DT <- data.table::data.table(
+        V1 = unique(A[,get(EntityColName)]), 
+        V2 = FeaturedProduct,
+        V3 = 0)
+      data.table::setnames(
+        x = DT, 
+        old = c("V1",
+                "V2",
+                "V3"),
+        new = c(eval(EntityColName),
+                eval(ProductColName),
+                eval(Rank)))
     } else {
-      DT <- data.table::data.table(unique(A[,get(EntityColName)]), FeaturedProduct,0, unique(A[,get(TimeStamp)]))
-      names(DT) <- c(eval(EntityColName),eval(ProductColName),eval(Rank),eval(TimeStamp))
+      DT <- data.table::data.table(
+        V1 = unique(A[,get(EntityColName)]), 
+        V2 = FeaturedProduct,
+        V3 = 0, 
+        V4 = unique(A[,get(TimeStamp)]))
+      data.table::setnames(
+        x = DT, 
+        old = c("V1",
+                "V2",
+                "V3",
+                "V4"),
+        new = c(eval(EntityColName),
+                eval(ProductColName),
+                eval(Rank),
+                eval(TimeStamp)))
     }
-  data <- data.table::rbindlist(list(DT,A,B), fill = TRUE)
-  data.table::setorderv(data, cols = c(eval(EntityColName),eval(Rank)))
-  return(data)
-  }}
-
-
+    
+    # Finalize data prep and return----
+    data <- data.table::rbindlist(
+      list(DT,A,B), 
+      fill = TRUE)
+    data.table::setorderv(
+      data, 
+      cols = c(eval(EntityColName),
+               eval(Rank)))
+    return(data)
+  }
+}
