@@ -138,7 +138,7 @@ We do not want to run this function if every customer already has the product re
 Test3 = AutoRecommenderUpdate(data = ProductRecommenderData ,FeaturedProduct = "23167")
 Test3
 ```
-Notice that only the customer without the featured product get a new record. This avoids duplicate products being recommended to the same customer. 
+Notice that only the customer without the featured product got a new record. This avoids duplicate products being recommended to the same customer. 
 
 ```{r}
 Test4 = AutoRecommenderUpdate(data = ProductRecommenderData,FeaturedProduct = "23167",ReplaceProduct = TRUE)
