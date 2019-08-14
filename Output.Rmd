@@ -1,7 +1,6 @@
 ---
-title: "Out"
+title: "Output"
 author: "Solomon Daner"
-date: "7/12/2019"
 output: html_document
 ---
 
@@ -147,4 +146,5 @@ Test4
 ```
 You have the option to replace products of a perticular rank by sepcifying the N argument (I left it blank so N equals 10 by default). This can be useful if you are worried about overloading your servers with too many products or you want to control the amount of products you want to recommend to your customers.
 
-# Notice that the featured products will always have a default product rank of 0. Hence, this will be the first product customer's see and it facilitates deletion if needed.
+# Conclusion 
+Notice that the featured products will always have a default product rank of 0. Hence, this will be the first product customer's see and it facilitates deletion if needed.
