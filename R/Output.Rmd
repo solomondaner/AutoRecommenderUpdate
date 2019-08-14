@@ -4,7 +4,7 @@ author: "Solomon Daner"
 output: html_document
 ---
 # Intro
-The AutoRecommenderUpdate function is presented in this webpage. The reader will first see sample data in a format that is typically outputed from a product recommender algorithm. The data contains two distinct customers with SKUs that they are most likely to purchase in ascending order, as well as the most recent timestamp in which the product recommender was ran. The source code of the AutoRecommenderFunction was then saved in order for it to be used to run tests that showed all three possible scenrios that the user will encounter as well as the different function paramaters that can be manipulated. 
+The AutoRecommenderUpdate function is presented in this webpage. The reader will first see sample data in a format that is typically outputed from a product recommender algorithm. The data contains two distinct customers with ten different SKUs that they are most likely to purchase in ascending order, as well as the most recent timestamp in which the product recommender was ran. The source code of the AutoRecommenderFunction was then saved in order for it to be used to run tests that showed all three possible scenrios that the user will encounter as well as the different function paramaters that can be manipulated. 
 
 # Hardcoded Data
 ```{r}
